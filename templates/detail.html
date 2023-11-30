@@ -12,24 +12,22 @@
 #}
 
 <main>
-        <h1>Tomato</h1>
+        <h1>{{ plant['name'] }}</h1>
 
-        <img src="https://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/tomatoes_helios4eos_gettyimages-edit.jpeg?itok=4KrW14a4">
-
-        
+        <img src="{{ plant['photo_url'] }}">
 
         <section id="info">
             <h3>Info</h3>
 
             <strong>Date Planted</strong>
-            3/20/2020
+            {{ plant['date_planted'] }}
             <br><br>
 
             <strong>Variety</strong>
-            Early Girl
+            {{ plant['variety'] }}
             <br><br>
 
-            <a class="nav" href="/edit/123456">Edit Plant</a><br><br>
+            <a class="nav" href="/edit/{{ plant['_id'] }}">Edit Plant</a><br><br>
         </section>
 
         <form action="/harvest/123456" method="POST">
