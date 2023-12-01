@@ -8,15 +8,6 @@
 
         <a href="/create" class="nav">+ New Plant</a>
 
-        {#
-            TODO: All of the following cards are what we'd refer to as
-            "hard-coded". That is, their values do not actually come from the 
-            database! Refactor this page to use a 'for' loop to display all
-            plants with the data passed from the route function's context.
-
-            HINT: Use the plant's _id field as the id for constructing URLs.
-        #}
-
         <div id="items">
 
             {% for plant in plants %}
