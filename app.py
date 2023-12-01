@@ -131,14 +131,14 @@ def edit(plant_id):
 
 @app.route("/delete/<plant_id>", methods=["POST"])
 def delete(plant_id):
-    # TODO: Make a `delete_one` database call to delete the plant with the given
-    # id.
+    # delete the plant with the given id
+    result = mongo.db.plants.delete_one({"_id": ObjectId(plant_id)})
+    print("delete success?", result.deleted_count)
 
-    # TODO: Also, make a `delete_many` database call to delete all harvests with
-    # the given plant id.
-
+    result = mongo.db.harvests.delete_many({"plant_id": plant_id})
+    print("deletes success?", result.deleted_count)
+    
     return redirect(url_for("plants_list"))
-
 
 if __name__ == "__main__":
     app.run(debug=True)
