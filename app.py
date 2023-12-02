@@ -68,8 +68,16 @@ def detail(plant_id):
     """Display the plant detail page & process data from the harvest form."""
 
     # retrieve *one* plant from the database, whose id matches the id passed in via the URL.
-    plant_to_show = mongo.db.plants.find_one({"_id": ObjectId(plant_id)})
-
+    # check for valid objectID
+    try:
+        plant_to_show = mongo.db.plants.find_one({"_id": ObjectId(plant_id)})
+    except:
+        return render_template("error.html")
+    
+    # check for valid db return
+    if plant_to_show == None:
+        return render_template("error.html")
+    
     # find all harvests for the plant's id.
     harvests = mongo.db.harvests.find({"plant_id": plant_id})
     harvests = list(harvests)
@@ -124,7 +132,16 @@ def edit(plant_id):
         return redirect(url_for("detail", plant_id=plant_id))
     else:
         # get the plant object with the passed-in _id.
-        plant_to_show = mongo.db.plants.find_one({"_id": ObjectId(plant_id)})
+        # check for valid objectID
+        try:
+            plant_to_show = mongo.db.plants.find_one({"_id": ObjectId(plant_id)})
+        except:
+            return render_template("error.html")
+        
+        # check for valid db return
+        if plant_to_show == None:
+            return render_template("error.html")
+
         context = {"plant": plant_to_show}
         return render_template("edit.html", **context)
 
